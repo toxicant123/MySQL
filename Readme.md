@@ -6,7 +6,7 @@ Begin in 2022/1/23
    * [第01章：数据库概述](Basic/src/main/sql/数据库概述与MySQL安装/第1章数据库概述/第1章数据库概述.md)
    * [第02章：MySQL环境搭建](Basic/src/main/sql/数据库概述与MySQL安装/第2章MySQL环境搭建/第2章MySQL环境搭建.md)
 2. SQL之SELECT使用篇
-   * 第03章：基本的SELECT语句
+   * [第03章：基本的SELECT语句](Basic/src/main/sql/SQL之SELECT使用篇/第3章基本的SELECT语句/第3章基本的SELECT语句.md)
    * 第04章：运算符
    * 第05章：排序与分页
    * 第06章：多表查询
