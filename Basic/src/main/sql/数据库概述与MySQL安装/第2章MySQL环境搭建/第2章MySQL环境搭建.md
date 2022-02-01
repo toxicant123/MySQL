@@ -1,4 +1,4 @@
-# 第2章MySQL环境搭建
+# 第2章 MySQL环境搭建
 ## 1. MySQL的卸载
 ### 步骤1：停止MySQL服务
 在卸载之前，先停止MySQL8.0的服务。按键盘上的<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Delete</kbd>组合键，打开“任务管理器”对话框，可以在“服务”列表找到“MySQL8.0”的服务，如果现在“正在运行”状态，可以右键单击服务，选择“停止”选项停止MySQL8.0的服务，如图所示：  
@@ -39,12 +39,17 @@
 ### 步骤4：清理注册表（选做）
 如果前几步做了，再次安装还是失败，那么可以清理注册表。如何打开注册表编辑器：在系统的搜索框中输入`regedit`
 ```
-HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MySQL服务 目录删除
-HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\MySQL服务 目录删除
-HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Services\Eventlog\Application\MySQL服务 目录删除
-HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Services\MySQL服务 目录删除
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application\MySQL服务目录删除
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MySQL服务删除
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MySQL 服务目录删除
+
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\MySQL 服务目录删除
+
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Services\Eventlog\Application\MySQL 服务目录删除
+
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Services\MySQL 服务目录删除
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application\MySQL 服务目录删除
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MySQL服务目录删除
 ```
 > 注册表中的ControlSet001,ControlSet002,不一定是001和002,可能是ControlSet005、006之类
 
