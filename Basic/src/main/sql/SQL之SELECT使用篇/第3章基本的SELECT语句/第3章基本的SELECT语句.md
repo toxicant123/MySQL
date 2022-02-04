@@ -134,7 +134,7 @@ mysql> desc employees;
 ## 3. 基本的SELECT语句
 
 ### 3.0 SELECT...
-```
+```sql
 SELECT 1; #没有任何子句
 SELECT 9/2; #没有任何子句
 ```
@@ -147,7 +147,7 @@ FROM 标识从哪个表中选择
 ```
 
 * 选择全部列：
-```
+```sql
 SELECT *
 FROM departments;
 ```
@@ -159,7 +159,7 @@ FROM departments;
 > 在生产环境下，不推荐直接使用 SELECT * 进行查询。
 
 选择特定的列：
-```
+```sql
 SELECT department_id, location_id
 FROM departments;
 ```
@@ -169,9 +169,9 @@ FROM departments;
 > MySQL中的SQL语句是不区分大小写的，因此SELECT和select的作用是相同的，但是，许多开发人员习惯将关键字大写、数据列和表名小写，读者也应该养成一个良好的编程习惯，这样写出来的代码更容易阅读和维护。
 
 * 伪表：
-```
+```sql
 SELECT 1 + 1, 3 * 2
-FROM DUAL; #dual：伪表
+FROM DUAL; # dual：伪表
 ```
 
 ### 3.2 列的别名
@@ -182,14 +182,14 @@ FROM DUAL; #dual：伪表
 * AS 为 alias 的简写，可以省略
 * 建议别名简短，见名知意
 * 举例：
-```
+```sql
 SELECT last_name AS name, commission_pct comm
 FROM employees;
 ```
 
 ![img_6.png](picture/img_6.png)
 
-```
+```sql
 SELECT last_name "Name", salary*12 "Annual Salary"
 FROM employees;
 ```
@@ -200,7 +200,7 @@ FROM employees;
 
 默认情况下，查询会返回全部行，包括重复行。
 
-```
+```sql
 SELECT department_id
 FROM employees;
 ```
@@ -209,7 +209,7 @@ FROM employees;
 
 在SELECT语句中使用关键字DISTINCT去除重复行
 
-```
+```sql
 SELECT DISTINCT department_id
 FROM employees;
 ```
@@ -218,7 +218,7 @@ FROM employees;
 
 针对于：
 
-```
+```sql
 SELECT DISTINCT department_id,salary
 FROM employees;
 ```
@@ -251,9 +251,8 @@ FROM employees;
 ### 3.4 空值参与运算
 所有运算符或列值遇到null值，运算的结果都为null
 
-```
-SELECT employee_id,salary,commission_pct,
-12 * salary * (1 + commission_pct) "annual_sal"
+```sql
+SELECT employee_id, salary, commission_pct, 12 * salary * (1 + commission_pct) "annual_sal"
 FROM employees;
 ```
 
@@ -262,12 +261,12 @@ FROM employees;
 这里一定要注意，在 MySQL 里面，空值不等于空字符串。一个空字符串的长度是 0，而一个空值的长度是空。而且，在 MySQL 里面，空值是占用空间的。
 
 另一例：
-```
-空值参与运算：结果一定也为空。
+```sql
+# 空值参与运算：结果一定也为空。
 SELECT employee_id, salary "月工资", salary * (1 + commission_pct) * 12 "年工资", commission_pct
 FROM employees;
 
-#实际问题的解决方案：引入IFNULL
+# 实际问题的解决方案：引入IFNULL
 SELECT employee_id, salary "月工资", salary * (1 + IFNULL(commission_pct, 0)) * 12 "年工资", commission_pct
 FROM `employees`;
 ```
@@ -316,13 +315,13 @@ SELECT 查询还可以对常数进行查询。对的，就是在 SELECT 查询�
 SQL 中的 SELECT 语法的确提供了这个功能，一般来说只从一个表中查询数据，通常不需要增加一个固定的常数列，但如果想整合不同的数据源，用常数列作为这个表的标记，就需要查询常数。
 
 比如说，要对 employees 数据表中的员工姓名进行查询，同时增加一列字段 corporation ，这个字段固定值为“尚硅谷”，可以这样写：
-```
+```sql
 SELECT '尚硅谷' as corporation, last_name FROM employees;
 ```
 
 另一个例子：
-```
-SELECT "尚硅谷",123,employee_id,last_name
+```sql
+SELECT '尚硅谷',123,employee_id,last_name
 FROM employees;
 ```
 
@@ -331,9 +330,9 @@ FROM employees;
 ## 4. 显示表结构
 
 使用DESCRIBE 或 DESC 命令，表示表结构。
-```
+```sql
 DESCRIBE employees;
-或
+# 或
 DESC employees;
 ```
 ```
@@ -379,7 +378,7 @@ mysql> desc employees;
   + WHERE子句紧随 FROM子句
 
 * 举例
-```
+```sql
 SELECT employee_id, last_name, job_id, department_id
 FROM employees
 WHERE department_id = 90 ;
@@ -390,10 +389,10 @@ WHERE department_id = 90 ;
 ## 提示
 ### 一
 在Windows环境下大小写不敏感，同时MySQL并没有严格地执行SQL语言的标准，导致where子句部分的条件判断会有一些小问题，例如：
-```
-SELECT * FROM employees WHERE last_name = "King";
+```sql
+SELECT * FROM employees WHERE last_name = 'King';
 
-SELECT * FROM employees WHERE last_name = "king";
+SELECT * FROM employees WHERE last_name = 'king';
 ```
 虽然K的大小写不同，但是上面两条SQL的查询结果相同，表明在Windows环境下MySQL认为"King"和"king"并无差别，所以才导致了这一现象
 
