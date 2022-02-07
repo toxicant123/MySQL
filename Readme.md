@@ -9,7 +9,7 @@ Begin in 2022/1/23
    * [第03章：基本的SELECT语句](Basic/src/main/sql/SQL之SELECT使用篇/第3章基本的SELECT语句/第3章基本的SELECT语句.md)
    * [第04章：运算符](Basic/src/main/sql/SQL之SELECT使用篇/第4章运算符/第4章运算符.md)
    * [第05章：排序与分页](Basic/src/main/sql/SQL之SELECT使用篇/第5章排序与分页/第5章排序与分页.md)
-   * 第06章：多表查询
+   * [第06章：多表查询](Basic/src/main/sql/SQL之SELECT使用篇/第6章多表查询/第6章多表查询.md)
    * 第07章：单行函数
    * 第08章：聚合函数
    * 第09章：子查询
