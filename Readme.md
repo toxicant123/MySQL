@@ -11,7 +11,7 @@ Begin in 2022/1/23
    * [第05章：排序与分页](Basic/src/main/sql/SQL之SELECT使用篇/第5章排序与分页/第5章排序与分页.md)
    * [第06章：多表查询](Basic/src/main/sql/SQL之SELECT使用篇/第6章多表查询/第6章多表查询.md)
    * [第07章：单行函数](Basic/src/main/sql/SQL之SELECT使用篇/第7章单行函数/第7章单行函数.md)
-   * 第08章：聚合函数
+   * [第08章：聚合函数](Basic/src/main/sql/SQL之SELECT使用篇/第8章聚合函数/第8章聚合函数.md)
    * 第09章：子查询
 4. SQL之DDL、DML、DCL使用篇
    * 第10章：创建和管理表
