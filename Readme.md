@@ -12,18 +12,18 @@ Begin in 2022/1/23
    * [第06章：多表查询](Basic/src/main/sql/SQL之SELECT使用篇/第6章多表查询/第6章多表查询.md)
    * [第07章：单行函数](Basic/src/main/sql/SQL之SELECT使用篇/第7章单行函数/第7章单行函数.md)
    * [第08章：聚合函数](Basic/src/main/sql/SQL之SELECT使用篇/第8章聚合函数/第8章聚合函数.md)
-   * 第09章：子查询
-4. SQL之DDL、DML、DCL使用篇
+   * [第09章：子查询](Basic/src/main/sql/SQL之SELECT使用篇/第9章子查询/第9章子查询.md)
+3. SQL之DDL、DML、DCL使用篇
    * 第10章：创建和管理表
    * 第11章：数据处理之增删改
    * 第12章：MySQL数据类型精讲
    * 第13章：约束
-5. 其它数据库对象篇
+4. 其它数据库对象篇
    * 第14章：视图
    * 第15章：存储过程与函数
    * 第16章：变量、流程控制与游标
    * 第17章：触发器
-6. MySQL8 新特性篇
+5. MySQL8 新特性篇
    * 第18章：MySQL8其它新特性
 
 ## 高级篇大纲
