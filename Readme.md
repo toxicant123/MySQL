@@ -49,9 +49,7 @@ Begin in 2022/1/23
    * 第16章：其它数据库日志
    * 第17章：主从复制
    * 第18章：数据库备份与恢复
-
-## SQL关键字
-
+   
 ## SQL语句执行顺序
 
 |        语句组        | 执行次序 |
@@ -65,3 +63,7 @@ Begin in 2022/1/23
 |     having 筛选     |  6   |
 |   order by排序列表    |  8   |
 | limit 起始条目索引，条目数; |  9   |
+
+## [SQL关键字](Other/src/main/sql/SQL关键字/SQL关键字.md)
+
+## [相关问题](Other/src/main/sql/SQL相关问题/相关问题.md)
