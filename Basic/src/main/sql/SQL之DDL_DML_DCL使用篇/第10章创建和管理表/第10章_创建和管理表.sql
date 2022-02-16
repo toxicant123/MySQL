@@ -199,7 +199,7 @@ DESC employees_copy;
 # COMMIT:提交数据。一旦执行COMMIT，则数据就被永久的保存在了数据库中，意味着数据不可以回滚。
 # ROLLBACK:回滚数据。一旦执行ROLLBACK,则可以实现数据的回滚。回滚到最近的一次COMMIT之后。
 
-#8. 对比 TRUNCATE TABLE 和 DELETE FROM 
+# 8. 对比 TRUNCATE TABLE 和 DELETE FROM
 # 相同点：都可以实现对表中所有数据的删除，同时保留表结构。
 # 不同点：
 #	TRUNCATE TABLE：一旦执行此操作，表数据全部清除。同时，数据是不可以回滚的。
@@ -255,7 +255,7 @@ FROM myemp3;
 
 #######################
 #9.测试MySQL8.0的新特性：DDL的原子化
-#todo
+
 CREATE DATABASE mytest;
 
 USE mytest;

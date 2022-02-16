@@ -14,7 +14,7 @@ Begin in 2022/1/23
    * [第08章：聚合函数](Basic/src/main/sql/SQL之SELECT使用篇/第8章聚合函数/第8章聚合函数.md)
    * [第09章：子查询](Basic/src/main/sql/SQL之SELECT使用篇/第9章子查询/第9章子查询.md)
 3. SQL之DDL、DML、DCL使用篇
-   * 第10章：创建和管理表
+   * [第10章：创建和管理表](Basic/src/main/sql/SQL之DDL_DML_DCL使用篇/第10章创建和管理表/第10章创建和管理表.md)
    * 第11章：数据处理之增删改
    * 第12章：MySQL数据类型精讲
    * 第13章：约束
@@ -49,6 +49,16 @@ Begin in 2022/1/23
    * 第16章：其它数据库日志
    * 第17章：主从复制
    * 第18章：数据库备份与恢复
+
+## SQL的分类
+
+DDL:数据定义语言：CREATE \ ALTER \ DROP \ RENAME \ TRUNCATE
+
+
+DML:数据操作语言：INSERT \ DELETE \ UPDATE \ SELECT （重中之重）
+
+
+DCL:数据控制语言：COMMIT \ ROLLBACK \ SAVEPOINT \ GRANT \ REVOKE
    
 ## SQL语句执行顺序
 
