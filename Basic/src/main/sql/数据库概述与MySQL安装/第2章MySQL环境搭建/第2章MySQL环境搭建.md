@@ -380,7 +380,7 @@ use atguigudb;
 使用完use语句之后，如果接下来的SQL都是针对一个数据库操作的，那就不用重复use了，如果要针对另一个数据库操作，那么要重新use。
 
 #### 4、查看某个库的所有表格
-```
+```sql
 show tables; #要求前面有use语句
 
 show tables from 数据库名;
@@ -388,7 +388,7 @@ show tables from 数据库名;
 
 ##### 5、创建新的表格
 
-```
+```sql
 create table 表名称(
     字段名 数据类型,
     字段名 数据类型
@@ -406,17 +406,17 @@ create table student(
 ```
 
 #### 6、查看一个表的数据
-```
+```sql
 select * from 数据库表名称;
 ```
 
-```
+```sql
 #查看学生表的数据
 select * from student;
 ```
 
 #### 7、添加一条记录
-```
+```sql
 insert into 表名称 values(值列表);
 #添加两条记录到student表中
 insert into student values(1,'张三');
@@ -438,7 +438,7 @@ mysql> show create table student;
 这是字符集的问题。
 
 #### 8、查看表的创建信息
-```
+```sql
 show create table 表名称\G
 
 #查看student表的详细创建信息
@@ -458,7 +458,7 @@ Create Table: CREATE TABLE `student` (
 上面的结果显示student的表格的默认字符集是“latin1”不支持中文。
 
 #### 9、查看数据库的创建信息
-```
+```sql
 show create database 数据库名\G
 
 #查看atguigudb数据库的详细创建信息
@@ -475,19 +475,19 @@ Create Database: CREATE DATABASE `atguigudb` /*!40100 DEFAULT CHARACTER SET lati
 上面的结果显示atguigudb数据库也不支持中文，字符集默认是latin1。
 
 #### 10、删除表格
-```
+```sql
 drop table 表名称;
 ```
-```
+```sql
 #删除学生表
 drop table student;
 ```
 
 #### 11、删除数据库
-```
+```sql
 drop database 数据库名;
 ```
-```
+```sql
 #删除atguigudb数据库
 drop database atguigudb;
 ```
@@ -498,8 +498,7 @@ drop database atguigudb;
 
 ```
 mysql> INSERT INTO t_stu VALUES(1,'张三','男');
-ERROR 1366 (HY000): Incorrect string value: '\xD5\xC5\xC8\xFD' for column 'sname' at
-row 1
+ERROR 1366 (HY000): Incorrect string value: '\xD5\xC5\xC8\xFD' for column 'sname' at row 1
 ```
 
 ##### 问题解决

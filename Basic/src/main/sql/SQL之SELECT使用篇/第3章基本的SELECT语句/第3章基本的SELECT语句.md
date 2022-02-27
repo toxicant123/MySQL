@@ -75,13 +75,13 @@ SQL语言在功能上主要分为如下3大类：
 * 保持字段名和类型的一致性，在命名字段并为其指定数据类型的时候一定要保证一致性。假如数据类型在一个表里是整数，那在另一个表里可就别变成字符型了
 
 举例：
-```
-#以下两句是一样的，不区分大小写
+```sql
+# 以下两句是一样的，不区分大小写
 show databases;
 SHOW DATABASES;
 
-#创建表格
-#create table student info(...); #表名错误，因为表名有空格
+# 创建表格
+# create table student info(...); #表名错误，因为表名有空格
 create table student_info(...); #正确
 
 #其中order使用``符号，因为order和系统关键字或系统函数名等预定义标识符重名了
@@ -141,7 +141,7 @@ SELECT 9/2; #没有任何子句
 
 ### 3.1 SELECT ... FROM
 * 语法：
-```
+```sql
 SELECT 标识选择哪些列
 FROM 标识从哪个表中选择
 ```
@@ -228,7 +228,7 @@ FROM employees;
 2. DISTINCT 其实是对后面所有列名的组合进行去重，能看到最后的结果是 74 条，因为这 74 个部门id不同，都有 salary 这个属性值。如果想要看都有哪些不同的部门（department_id），只需要写 DISTINCT department_id 即可，后面不需要再加其他的列名了。
 
 另一例：
-```
+```sql
 #查询员工表中一共有哪些部门id呢？
 
 #错误的:没有去重的情况
@@ -369,7 +369,7 @@ mysql> desc employees;
 ![img_12.png](picture/img_12.png)
 
 * 语法：
-  ```
+  ```sql
   SELECT 字段1,字段2
   FROM 表名
   WHERE 过滤条件
