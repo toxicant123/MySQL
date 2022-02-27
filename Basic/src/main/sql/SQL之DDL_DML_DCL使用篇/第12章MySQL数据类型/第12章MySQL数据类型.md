@@ -33,7 +33,7 @@
 
 可以使用`character set name`来指定字符集
 
-```
+```sql
 #创建数据库时指名字符集
 CREATE DATABASE IF NOT EXISTS dbtest12 CHARACTER SET 'utf8';
 
@@ -82,7 +82,7 @@ CREATE TABLE temp1
 
 举例：
 
-```
+```sql
 CREATE TABLE test_int1 ( x TINYINT, y SMALLINT, z MEDIUMINT, m INT, n BIGINT );
 ```
 
@@ -121,7 +121,7 @@ TINYINT有符号数和无符号数的取值范围分别为-128~127和0~255，由
 
 举例：
 
-```
+```sql
 CREATE TABLE test_int2(
     f1 INT,
     f2 INT(5),
@@ -168,7 +168,7 @@ mysql> SELECT * FROM test_int2;
 
 int类型默认显示宽度为int(11)，无符号int类型默认显示宽度为int(10)。
 
-```
+```sql
 CREATE TABLE test_int3(
     f1 INT UNSIGNED
 );
@@ -226,7 +226,7 @@ mysql> desc test_int3;
 
 * REAL默认就是 DOUBLE。如果你把 SQL 模式设定为启用`REAL_AS_FLOAT`，那么，MySQL 就认为 REAL 是 FLOAT。如果要启用“REAL_AS_FLOAT”，可以通过以下 SQL 语句实现：
 
-```
+```sql
 SET sql_mode = “REAL_AS_FLOAT”;
 ```
 
@@ -260,7 +260,7 @@ MySQL 存储浮点数的格式为：`符号(S)`、`尾数(M)`和`阶码(E)`。�
 
 举例：
 
-```
+```sql
 CREATE TABLE test_double1(
     f1 FLOAT,
     f2 FLOAT(5, 2),
@@ -306,7 +306,7 @@ mysql> SELECT * FROM test_double1;
 
 浮点数类型有个缺陷，就是不精准。下面重点解释一下为什么 MySQL 的浮点数不够精准。比如，先设计一个表，有f1这个字段，插入值分别为0.47,0.44,0.19，期望的运行结果是：0.47 + 0.44 + 0.19 = 1.1。而使用sum之后查询：
 
-```
+```sql
 CREATE TABLE test_double2(
     f1 DOUBLE
 );
@@ -368,7 +368,7 @@ MySQL 用 4 个字节存储 FLOAT 类型数据，用 8 个字节来存储 DOUBLE
 
 举例：
 
-```
+```sql
 CREATE TABLE test_decimal1(
   f1 DECIMAL,
   f2 DECIMAL(5, 2)
@@ -407,7 +407,7 @@ mysql> SELECT * FROM test_decimal1;
 
 运行下面的语句，把test_double2表中字段“f1”的数据类型修改为 DECIMAL(5,2)：
 
-```
+```sql
 ALTER TABLE test_double2
 MODIFY f1 DECIMAL(5,2);
 ```
@@ -446,7 +446,7 @@ BIT类型中存储的是二进制值，类似010110。
 
 BIT类型，如果没有指定(M)，默认是1位。这个1位，表示只能存1位的二进制值。这里(M)是表示二进制的位数，位数最小值为1，最大值为64。
 
-```
+```sql
 CREATE TABLE test_bit1(
   f1 BIT,
   f2 BIT(5),
@@ -537,7 +537,7 @@ YEAR类型用来表示年份，在所有的日期时间类型中所占用的存�
 
 从MySQL5.5.27开始，2位格式的YEAR已经不推荐使用。YEAR默认格式就是“YYYY”，没必要写成YEAR(4)，从MySQL 8.0.19开始，不推荐使用指定显示宽度的YEAR(4)数据类型。
 
-```
+```sql
 CREATE TABLE test_year(
   f1 YEAR,
   f2 YEAR(4)
@@ -586,7 +586,7 @@ DATE类型表示日期，没有时间部分，格式为`YYYY-MM-DD`，其中，Y
 
 创建数据表，表中只包含一个DATE类型的字段f1，并插入数据：
 
-```
+```sql
 CREATE TABLE test_date1(
   f1 DATE
 );
@@ -656,7 +656,7 @@ TIME类型用来表示时间，不包含日期部分。在MySQL中，需要`3个
 
 创建数据表，表中包含一个TIME类型的字段f1，并插入数据：
 
-```
+```sql
 CREATE TABLE test_time1(
   f1 TIME
 );
@@ -715,7 +715,7 @@ DATETIME类型在所有的日期时间类型中占用的存储空间最大，总
 
 创建数据表，表中包含一个DATETIME类型的字段dt，并插入数据：
 
-```
+```sql
 CREATE TABLE test_datetime1(
   dt DATETIME
 );
@@ -777,7 +777,7 @@ TIMESTAMP类型也可以表示日期时间，其显示格式与DATETIME类型相
 
 创建数据表，表中包含一个TIMESTAMP类型的字段ts，并插入数据
 
-```
+```sql
 CREATE TABLE test_timestamp1(
   ts TIMESTAMP
 );
@@ -824,7 +824,7 @@ TIMESTAMP和DATETIME的区别：
 * 两个日期比较大小或日期计算时，TIMESTAMP更方便、更快。
 * TIMESTAMP和时区有关。TIMESTAMP会根据用户的时区不同，显示不同的结果。而DATETIME则只能反映出插入时当地的时区，其他时区的人查看数据必然会有误差的。
 
-```
+```sql
 CREATE TABLE temp_time(
   d1 DATETIME,
   d2 TIMESTAMP
@@ -835,7 +835,9 @@ VALUES ('2021-9-2 14:45:52', '2021-9-2 14:45:52');
 
 INSERT INTO temp_time
 VALUES (NOW(), NOW());
+```
 
+```
 mysql> SELECT * FROM temp_time;
 +---------------------+---------------------+
 | d1                  | d2                  |
@@ -906,7 +908,7 @@ CHAR类型：
 * 如果保存时，数据的实际长度比CHAR类型声明的长度小，则会在`右侧填充`空格以达到指定的长度。当MySQL检索CHAR类型的数据时，CHAR类型的字段会去除尾部的空格。
 * 定义CHAR类型字段时，声明的字段长度即为CHAR类型字段所占的存储空间的字节数。
 
-```
+```sql
 CREATE TABLE test_char1(
   c1 CHAR,
   c2 CHAR(5)
@@ -956,7 +958,7 @@ VARCHAR类型：
 
 错误示例：
 
-```
+```sql
 CREATE TABLE test_varchar1(
   NAME VARCHAR #错误
 );
@@ -1015,7 +1017,7 @@ VALUES ('宁波市象山县');
 
 举例：
 
-```
+```sql
 CREATE TABLE test_text(
   tx TEXT
 );
@@ -1024,7 +1026,7 @@ INSERT INTO test_text
 VALUES ('atguigu ');
 
 SELECT CHAR_LENGTH(tx)
-FROM test_text; #10
+FROM test_text; # 10
 ```
 
 ```
@@ -1060,7 +1062,7 @@ ENUM类型也叫作枚举类型，ENUM类型的取值范围需要在定义字段
 举例：
 
 创建表并添加数据：
-```
+```sql
 CREATE TABLE test_enum(
   season ENUM ('春','夏','秋','冬','unknow')
 );
@@ -1123,7 +1125,7 @@ SET类型在存储数据时成员个数越多，其占用的存储空间越大�
 
 创建表并插入数据：
 
-```
+```sql
 CREATE TABLE test_set(
   s SET ('A', 'B', 'C')
 );
@@ -1155,7 +1157,7 @@ mysql> SELECT * FROM test_set;
 
 举例：
 
-```
+```sql
 CREATE TABLE temp_mul(
 gender ENUM('男','女'),
 hobby SET('吃饭','睡觉','打游戏','去旅游')
@@ -1196,7 +1198,7 @@ VARBINARY (M)为可变长度的二进制字符串，M表示最多能存储的字
 
 创建表，并添加数据：
 
-```
+```sql
 CREATE TABLE test_binary1(
   f1 BINARY,
   f2 BINARY(3),
@@ -1243,7 +1245,7 @@ MySQL中的BLOB类型包括`TINYBLOB`、`BLOB`、`MEDIUMBLOB`和`LONGBLOB`4种�
 
 举例：
 
-```
+```sql
 CREATE TABLE test_blob1(
   id  INT,
   img MEDIUMBLOB
