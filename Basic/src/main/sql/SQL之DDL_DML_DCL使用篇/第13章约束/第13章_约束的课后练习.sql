@@ -5,7 +5,8 @@ CREATE DATABASE test04_emp;
 
 USE test04_emp;
 
-CREATE TABLE emp2(
+CREATE TABLE emp2
+(
     id       INT,
     emp_name VARCHAR(15)
 );
@@ -38,39 +39,39 @@ DESC emp2;
 ALTER TABLE emp2
     ADD CONSTRAINT fk_emp2_deptid FOREIGN KEY (dept_id) REFERENCES dept2 (id);
 
-# #练习2：
-# #承接《第11章_数据处理之增删改》的综合案例。
-# USE test01_library;
-#
-# DESC books;
-#
-# #根据题目要求给books表中的字段添加约束
-# #方式1：
-# ALTER TABLE books
-#     ADD PRIMARY KEY (id);
-#
-# ALTER TABLE books
-#     MODIFY id INT AUTO_INCREMENT;
-# #方式2：
-# ALTER TABLE books
-#     MODIFY id INT PRIMARY KEY AUTO_INCREMENT;
-#
-#
-# #针对于非id字段的操作
-# ALTER TABLE books
-#     MODIFY NAME VARCHAR(50) NOT NULL;
-#
-# ALTER TABLE books
-#     MODIFY AUTHORS VARCHAR(100) NOT NULL;
-#
-# ALTER TABLE books
-#     MODIFY price FLOAT NOT NULL;
-#
-# ALTER TABLE books
-#     MODIFY pubdate YEAR NOT NULL;
-#
-# ALTER TABLE books
-#     MODIFY num INT NOT NULL;
+#练习2：
+#承接《第11章_数据处理之增删改》的综合案例。
+USE test01_library;
+
+DESC books;
+
+#根据题目要求给books表中的字段添加约束
+#方式1：
+ALTER TABLE books
+    ADD PRIMARY KEY (id);
+
+ALTER TABLE books
+    MODIFY id INT AUTO_INCREMENT;
+#方式2：
+ALTER TABLE books
+    MODIFY id INT PRIMARY KEY AUTO_INCREMENT;
+
+
+#针对于非id字段的操作
+ALTER TABLE books
+    MODIFY NAME VARCHAR(50) NOT NULL;
+
+ALTER TABLE books
+    MODIFY AUTHORS VARCHAR(100) NOT NULL;
+
+ALTER TABLE books
+    MODIFY price FLOAT NOT NULL;
+
+ALTER TABLE books
+    MODIFY pubdate YEAR NOT NULL;
+
+ALTER TABLE books
+    MODIFY num INT NOT NULL;
 
 
 #练习3：

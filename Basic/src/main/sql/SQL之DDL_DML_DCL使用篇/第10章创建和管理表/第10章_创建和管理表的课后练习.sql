@@ -80,8 +80,8 @@ DESC dept02;
 
 #10.直接删除表emp01中的列 department_id
 
-# ALTER TABLE emp01
-#     DROP COLUMN department_id;
+ALTER TABLE emp01
+    DROP COLUMN department_id;
 
 #练习2：
 # 1、创建数据库 test02_market

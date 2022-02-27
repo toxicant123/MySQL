@@ -134,7 +134,7 @@ FROM departments d,
          ORDER BY avg_sal ASC
          LIMIT 0,1
      ) t_dept_avg_sal
-WHERE d.`department_id` = t_dept_avg_sal.department_id;
+WHERE d.`department_id` = t_dept_avg_sal.department_id
 
 #9.查询平均工资最低的部门信息和该部门的平均工资（相关子查询）
 #方式1：
@@ -197,7 +197,7 @@ FROM departments d,
          ORDER BY avg_sal ASC
          LIMIT 0,1
      ) t_dept_avg_sal
-WHERE d.`department_id` = t_dept_avg_sal.department_id;
+WHERE d.`department_id` = t_dept_avg_sal.department_id
 
 #10.查询平均工资最高的 job 信息
 
@@ -258,7 +258,7 @@ FROM jobs j,
          ORDER BY avg_sal DESC
          LIMIT 0,1
      ) t_job_avg_sal
-WHERE j.job_id = t_job_avg_sal.job_id;
+WHERE j.job_id = t_job_avg_sal.job_id
 
 #11.查询平均工资高于公司平均工资的部门有哪些?
 
@@ -362,7 +362,7 @@ FROM employees e,
          ORDER BY max_sal ASC
          LIMIT 0,1
      ) t_dept_max_sal
-WHERE e.department_id = t_dept_max_sal.department_id;
+WHERE e.department_id = t_dept_max_sal.department_id
 
 
 #14.查询平均工资最高的部门的 manager 的详细信息: last_name, department_id, email, salary
@@ -493,7 +493,7 @@ FROM employees e,
          FROM employees
          GROUP BY department_id) t_dept_avg_sal
 WHERE e.department_id = t_dept_avg_sal.department_id
-  AND e.salary > t_dept_avg_sal.avg_sal;
+  AND e.salary > t_dept_avg_sal.avg_sal
 
 
 #19.查询每个部门下的部门人数大于 5 的部门名称（相关子查询）

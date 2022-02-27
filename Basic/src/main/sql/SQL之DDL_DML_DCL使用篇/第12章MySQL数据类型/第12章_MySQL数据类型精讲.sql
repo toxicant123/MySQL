@@ -38,6 +38,7 @@ CREATE TABLE test_int1
     f3 MEDIUMINT,
     f4 INTEGER,
     f5 BIGINT
+
 );
 
 DESC test_int1;
@@ -60,7 +61,7 @@ CREATE TABLE test_int2
     f1 INT,
     f2 INT(5),
     f3 INT(5) ZEROFILL #① 显示宽度为5。当insert的值不足5位时，使用0填充。 ②当使用ZEROFILL时，自动会添加UNSIGNED
-);
+)
 
 INSERT INTO test_int2(f1, f2)
 VALUES (123, 123),
@@ -439,9 +440,10 @@ SELECT CHAR_LENGTH(c2)
 FROM test_char1;
 
 #7.2 VARCHAR类型
-# CREATE TABLE test_varchar1(
-# NAME VARCHAR  #错误
-# );
+CREATE TABLE test_varchar1
+(
+    NAME VARCHAR #错误
+);
 
 #Column length too big for column 'name' (max = 21845); use BLOB or TEXT instead
 CREATE TABLE test_varchar2

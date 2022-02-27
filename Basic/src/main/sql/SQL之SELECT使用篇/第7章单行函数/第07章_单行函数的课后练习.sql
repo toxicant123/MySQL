@@ -80,14 +80,14 @@ SELECT last_name "Last_name",
 FROM employees;
 
 
-# SELECT last_name                "Last_name",
-#        job_id                   "Job_id",
-#        CASE job_id
-#            WHEN 'AD_PRES' THEN 'A'
-#            WHEN 'ST_MAN' THEN 'B'
-#            WHEN 'IT_PROG' THEN 'C'
-#            WHEN 'SA_REP' THEN 'D'
-#            WHEN 'ST_CLERK' THEN 'E'
-#            ELSE "undefined" END "Grade"
-# FROM employees;
+SELECT last_name                "Last_name",
+       job_id                   "Job_id",
+       CASE job_id
+           WHEN 'AD_PRES' THEN 'A'
+           WHEN 'ST_MAN' THEN 'B'
+           WHEN 'IT_PROG' THEN 'C'
+           WHEN 'SA_REP' THEN 'D'
+           WHEN 'ST_CLERK' THEN 'E'
+           ELSE "undefined" END "Grade"
+FROM employees;
 

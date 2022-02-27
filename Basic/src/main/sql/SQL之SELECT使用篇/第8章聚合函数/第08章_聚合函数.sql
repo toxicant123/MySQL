@@ -71,7 +71,7 @@ FROM employees;
 #需求：查询各个部门的平均工资，最高工资
 SELECT department_id, AVG(salary), SUM(salary)
 FROM employees
-GROUP BY department_id;
+GROUP BY department_id
 
 #需求：查询各个job_id的平均工资
 SELECT job_id, AVG(salary)
@@ -123,10 +123,10 @@ ORDER BY avg_sal ASC;
 #3. HAVING的使用 (作用：用来过滤数据的)
 #练习：查询各个部门中最高工资比10000高的部门信息
 #错误的写法：
-# SELECT department_id, MAX(salary)
-# FROM employees
-# WHERE MAX(salary) > 10000
-# GROUP BY department_id;
+SELECT department_id, MAX(salary)
+FROM employees
+WHERE MAX(salary) > 10000
+GROUP BY department_id;
 
 
 #要求1：如果过滤条件中使用了聚合函数，则必须使用HAVING来替换WHERE。否则，报错。

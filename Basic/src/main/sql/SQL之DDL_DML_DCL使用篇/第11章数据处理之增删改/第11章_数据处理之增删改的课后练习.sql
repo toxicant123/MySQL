@@ -28,12 +28,12 @@ DESC my_employees;
 DESC users;
 
 #4.向my_employees表中插入下列数据
-# ID	FIRST_NAME	LAST_NAME	USERID		SALARY
-# 1	patel		Ralph		Rpatel		895
-# 2	Dancs		Betty		Bdancs		860
-# 3	Biri		Ben		Bbiri		1100
-# 4	Newman		Chad		Cnewman		750
-# 5	Ropeburn	Audrey		Aropebur	1550
+ID	FIRST_NAME	LAST_NAME	USERID		SALARY
+1	patel		Ralph		Rpatel		895
+2	Dancs		Betty		Bdancs		860
+3	Biri		Ben		Bbiri		1100
+4	Newman		Chad		Cnewman		750
+5	Ropeburn	Audrey		Aropebur	1550
 
 INSERT INTO my_employees
 VALUES (1, 'patel', 'Ralph', 'Rpatel', 895);
@@ -63,17 +63,17 @@ UNION ALL
 SELECT 5, 'Ropeburn', 'Audrey', 'Aropebur', 1550;
 
 #5.向users表中插入数据
-# 1	Rpatel		10
-# 2	Bdancs		10
-# 3	Bbiri		20
-# 4	Cnewman		30
-# 5	Aropebur	40
+1	Rpatel		10
+2	Bdancs		10
+3	Bbiri		20
+4	Cnewman		30
+5	Aropebur	40
 INSERT INTO users
 VALUES (1, 'Rpatel', 10),
        (2, 'Bdancs', 10),
        (3, 'Bbiri', 20),
        (4, 'Cnewman', 30),
-       (5, 'Aropebur', 40);
+       (5, 'Aropebur', 40)
 
 SELECT *
 FROM users;

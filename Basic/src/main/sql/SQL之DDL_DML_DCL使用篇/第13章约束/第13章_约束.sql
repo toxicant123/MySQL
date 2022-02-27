@@ -238,8 +238,8 @@ WHERE table_name = 'test2';
 DESC test2;
 
 #如何删除唯一性索引
-# ALTER TABLE test2
-#     DROP INDEX last_name;
+ALTER TABLE test2
+    DROP INDEX last_name;
 
 ALTER TABLE test2
     DROP INDEX uk_test2_sal;
@@ -631,8 +631,8 @@ ALTER TABLE emp1
 #再手动的删除外键约束对应的普通索引
 SHOW INDEX FROM emp1;
 
-# ALTER TABLE emp1
-#     DROP INDEX fk_emp1_dept_id;
+ALTER TABLE emp1
+    DROP INDEX fk_emp1_dept_id;
 
 #8. check 约束
 # MySQL5.7 不支持CHECK约束，MySQL8.0支持CHECK约束。

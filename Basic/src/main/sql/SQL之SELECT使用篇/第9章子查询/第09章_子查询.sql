@@ -226,7 +226,7 @@ HAVING AVG(salary) <= ALL (
     SELECT AVG(salary) avg_sal
     FROM employees
     GROUP BY department_id
-);
+)
 #5.3 空值问题
 SELECT last_name
 FROM employees
@@ -263,7 +263,7 @@ FROM employees e,
          FROM employees
          GROUP BY department_id) t_dept_avg_sal
 WHERE e.department_id = t_dept_avg_sal.department_id
-  AND e.salary > t_dept_avg_sal.avg_sal;
+  AND e.salary > t_dept_avg_sal.avg_sal
 
 
 #题目：查询员工的id,salary,按照department_name 排序
@@ -300,7 +300,7 @@ WHERE 2 <= (
     SELECT COUNT(*)
     FROM job_history j
     WHERE e.`employee_id` = j.`employee_id`
-);
+)
 
 #6.2 EXISTS 与 NOT EXISTS关键字
 

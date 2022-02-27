@@ -37,7 +37,7 @@ SELECT d.department_name, d.location_id, COUNT(employee_id), AVG(salary)
 FROM departments d
          LEFT JOIN employees e
                    ON d.`department_id` = e.`department_id`
-GROUP BY department_name, location_id;
+GROUP BY department_name, location_id
 
 
 # 8.查询每个工种、每个部门的部门名、工种名和最低工资 

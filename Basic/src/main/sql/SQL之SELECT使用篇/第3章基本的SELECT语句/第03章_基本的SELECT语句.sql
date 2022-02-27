@@ -55,7 +55,7 @@ VALUES (1003, 'Jerry');
 
 # SELECT * FROM emp\G
 
-SHOW CREATE TABLE emp;
+SHOW CREATE TABLE emp\g
 
 /*
 4. 导入现有的数据表、表的数据。
@@ -146,4 +146,5 @@ WHERE department_id = 90;
 #练习：查询last_name为'King'的员工信息
 SELECT *
 FROM EMPLOYEES
-WHERE LAST_NAME = 'King';
+WHERE LAST_NAME = 'King'; 
+

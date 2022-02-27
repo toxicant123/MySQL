@@ -69,8 +69,8 @@ DESC departments;
 DESC locations;
 
 # 6.选择指定员工的姓名，员工号，以及他的管理者的姓名和员工号，结果类似于下面的格式
-#employees	Emp#	manager	Mgr#
-#kochhar		101	king	100
+employees	Emp#	manager	Mgr#
+kochhar		101	king	100
 
 SELECT emp.last_name "employees", emp.employee_id "Emp#", mgr.last_name "manager", mgr.employee_id "Mgr#"
 FROM employees emp

@@ -36,9 +36,9 @@ ORDER BY annual_sal;
 
 #列的别名只能在 ORDER BY 中使用，不能在WHERE中使用。
 #如下操作报错！
-# SELECT employee_id, salary, salary * 12 annual_sal
-# FROM employees
-# WHERE annual_sal > 81600;
+SELECT employee_id, salary, salary * 12 annual_sal
+FROM employees
+WHERE annual_sal > 81600;
 
 #3. 强调格式：WHERE 需要声明在FROM后，ORDER BY之前。
 SELECT employee_id, salary

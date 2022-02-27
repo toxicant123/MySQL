@@ -79,10 +79,10 @@ WHERE emp.`department_id` = dept.department_id;
 
 #如果给表起了别名，一旦在SELECT或WHERE中使用表名的话，则必须使用表的别名，而不能再使用表的原名。
 #如下的操作是错误的：
-# SELECT emp.employee_id, departments.department_name, emp.department_id
-# FROM employees emp,
-#      departments dept
-# WHERE emp.`department_id` = departments.department_id;
+SELECT emp.employee_id, departments.department_name, emp.department_id
+FROM employees emp,
+     departments dept
+WHERE emp.`department_id` = departments.department_id;
 
 
 #6. 结论：如果有n个表实现多表的查询，则需要至少n-1个连接条件
@@ -167,10 +167,10 @@ WHERE e.`department_id` = d.department_id;
 #SQL92语法实现内连接：见上，略
 #SQL92语法实现外连接：使用 +  ----------MySQL不支持SQL92语法中外连接的写法！
 #不支持：
-# SELECT employee_id, department_name
-# FROM employees e,
-#      departments d
-# WHERE e.`department_id` = d.department_id(+);
+SELECT employee_id, department_name
+FROM employees e,
+     departments d
+WHERE e.`department_id` = d.department_id(+);
 
 #SQL99语法中使用 JOIN ...ON 的方式实现多表的查询。这种方式也能解决外连接的问题。MySQL是支持此种方式的。
 #SQL99语法如何实现多表的查询。
@@ -205,9 +205,9 @@ FROM employees e
 
 
 #满外连接：mysql不支持FULL OUTER JOIN
-# SELECT last_name, department_name
-# FROM employees e FULL OUTER JOIN departments d
-# ON e.`department_id` = d.`department_id`;
+SELECT last_name, department_name
+FROM employees e FULL OUTER JOIN departments d
+ON e.`department_id` = d.`department_id`;
 
 #8. UNION  和 UNION ALL的使用
 # UNION：会执行去重操作
