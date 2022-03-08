@@ -299,7 +299,7 @@ FROM employees e
               ON e.`department_id` = d.`department_id`
                   AND e.`manager_id` = d.`manager_id`;
 
-# NATURAL JOIN : 它会帮你自动查询两张连接表中`所有相同的字段`，然后进行`等值连接`。
+# NATURAL JOIN : 它会自动查询两张连接表中`所有相同的字段`，然后进行`等值连接`。
 SELECT employee_id, last_name, department_name
 FROM employees e
          NATURAL JOIN departments d;
