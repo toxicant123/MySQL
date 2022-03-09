@@ -140,8 +140,165 @@ mysql_plugin工具用来配置MySQL服务器插件，现已被删除，可使用
 
 ## 2. 新特性1：窗口函数
 
+### 2.1 使用窗口函数前后对比
 
+假设现在有这样一个数据表，它显示了某购物网站在每个城市每个区的销售额：
 
+```sql
+CREATE TABLE sales(
+    id          INT PRIMARY KEY AUTO_INCREMENT,
+    city        VARCHAR(15),
+    county      VARCHAR(15),
+    sales_value DECIMAL
+);
+
+INSERT INTO sales(city, county, sales_value)
+VALUES ('北京', '海淀', 10.00),
+       ('北京', '朝阳', 20.00),
+       ('上海', '黄埔', 30.00),
+       ('上海', '长宁', 10.00);
+```
+
+查询：
+
+```
+mysql> SELECT * FROM sales;
++----+------+--------+-------------+
+| id | city | county | sales_value |
++----+------+--------+-------------+
+|  1 | 北京 | 海淀   |          10 |
+|  2 | 北京 | 朝阳   |          20 |
+|  3 | 上海 | 黄埔   |          30 |
+|  4 | 上海 | 长宁   |          10 |
++----+------+--------+-------------+
+4 rows in set (0.00 sec)
+```
+
+**需求**：现在计算这个网站在每个城市的销售总额、在全国的销售总额、每个区的销售额占所在城市销售额中的比率，以及占总销售额中的比率。
+
+如果用分组和聚合函数，就需要分好几步来计算。
+
+第一步，计算总销售金额，并存入临时表 a：
+
+```sql
+CREATE TEMPORARY TABLE a -- 创建临时表
+SELECT SUM(sales_value) AS sales_value -- 计算总计金额
+FROM sales;
+```
+
+查看一下临时表 a ：
+
+```
+mysql>  SELECT * FROM a;                                      
++-------------+
+| sales_value |
++-------------+
+|          70 |
++-------------+
+1 row in set (0.00 sec)
+```
+
+第二步，计算每个城市的销售总额并存入临时表 b：
+
+```sql
+CREATE TEMPORARY TABLE b -- 创建临时表
+SELECT city, SUM(sales_value) AS sales_value -- 计算城市销售合计
+FROM sales
+GROUP BY city;
+```
+
+查看临时表 b ：
+
+```
+mysql> SELECT * FROM b;
++------+-------------+
+| city | sales_value |
++------+-------------+
+| 北京 |          30 |
+| 上海 |          40 |
++------+-------------+
+2 rows in set (0.00 sec)
+```
+
+第三步，计算各区的销售占所在城市的总计金额的比例，和占全部销售总计金额的比例。我们可以通过下面的连接查询获得需要的结果：
+
+```sql
+SELECT s.city                        AS 城市,
+       s.county                      AS 区,
+       s.sales_value                 AS 区销售额,
+       b.sales_value                 AS 市销售额,
+       s.sales_value / b.sales_value AS 市比率,
+       a.sales_value                 AS 总销售额,
+       s.sales_value / a.sales_value AS 总比率
+FROM sales s
+         JOIN b ON (s.city = b.city) -- 连接市统计结果临时表
+         JOIN a -- 连接总计金额临时表
+ORDER BY s.city, s.county;
+```
+
+```
+mysql> SELECT s.city                        AS 城市,
+    ->        s.county                      AS 区,
+    ->        s.sales_value                 AS 区销售额,
+    ->        b.sales_value                 AS 市销售额,
+    ->        s.sales_value / b.sales_value AS 市比率,
+    ->        a.sales_value                 AS 总销售额,
+    ->        s.sales_value / a.sales_value AS 总比率
+    -> FROM sales s
+    ->          JOIN b ON (s.city = b.city) -- 连接市统计结果临时表
+    ->          JOIN a -- 连接总计金额临时表
+    -> ORDER BY s.city, s.county;
++------+------+----------+----------+--------+----------+--------+
+| 城市 | 区   | 区销售额 | 市销售额 | 市比率 | 总销售额 | 总比率 |
++------+------+----------+----------+--------+----------+--------+
+| 上海 | 长宁 |       10 |       40 | 0.2500 |       70 | 0.1429 |
+| 上海 | 黄埔 |       30 |       40 | 0.7500 |       70 | 0.4286 |
+| 北京 | 朝阳 |       20 |       30 | 0.6667 |       70 | 0.2857 |
+| 北京 | 海淀 |       10 |       30 | 0.3333 |       70 | 0.1429 |
++------+------+----------+----------+--------+----------+--------+
+4 rows in set (0.00 sec)
+```
+
+结果显示：市销售金额、市销售占比、总销售金额、总销售占比都计算出来了。
+
+同样的查询，如果用窗口函数，就简单多了。可以用下面的代码来实现：
+
+```sql
+SELECT city                                                    AS 城市,
+       county                                                  AS 区,
+       sales_value                                             AS 区销售额,
+       SUM(sales_value) OVER (PARTITION BY city)               AS 市销售额, -- 计算市销售额
+       sales_value / SUM(sales_value) OVER (PARTITION BY city) AS 市比率,
+       SUM(sales_value) OVER ()                                AS 总销售额, -- 计算总销售额
+       sales_value / SUM(sales_value) OVER ()                  AS 总比率
+FROM sales
+ORDER BY city, county;
+```
+
+```
+mysql> SELECT city                                                    AS 城市,
+    ->        county                                                  AS 区,
+    ->        sales_value                                             AS 区销售额,
+    ->        SUM(sales_value) OVER (PARTITION BY city)               AS 市销售额, -- 计算市销售额
+    ->        sales_value / SUM(sales_value) OVER (PARTITION BY city) AS 市比率,
+    ->        SUM(sales_value) OVER ()                                AS 总销售额, -- 计算总销售额
+    ->        sales_value / SUM(sales_value) OVER ()                  AS 总比率
+    -> FROM sales
+    -> ORDER BY city, county;
++------+------+----------+----------+--------+----------+--------+
+| 城市 | 区   | 区销售额 | 市销售额 | 市比率 | 总销售额 | 总比率 |
++------+------+----------+----------+--------+----------+--------+
+| 上海 | 长宁 |       10 |       40 | 0.2500 |       70 | 0.1429 |
+| 上海 | 黄埔 |       30 |       40 | 0.7500 |       70 | 0.4286 |
+| 北京 | 朝阳 |       20 |       30 | 0.6667 |       70 | 0.2857 |
+| 北京 | 海淀 |       10 |       30 | 0.3333 |       70 | 0.1429 |
++------+------+----------+----------+--------+----------+--------+
+4 rows in set (0.00 sec)
+```
+
+结果显示，得到了与上面那种查询同样的结果。
+
+使用窗口函数，只用了一步就完成了查询。而且，由于没有用到临时表，执行的效率也更高了。很显然，在这种需要用到分组统计的结果对每一条记录进行计算的场景下，使用窗口函数更好。
 
 
 
