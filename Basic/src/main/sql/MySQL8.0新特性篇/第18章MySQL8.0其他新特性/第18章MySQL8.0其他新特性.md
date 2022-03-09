@@ -298,15 +298,76 @@ mysql> SELECT city                                                    AS 城市,
 
 结果显示，得到了与上面那种查询同样的结果。
 
-使用窗口函数，只用了一步就完成了查询。而且，由于没有用到临时表，执行的效率也更高了。很显然，在这种需要用到分组统计的结果对每一条记录进行计算的场景下，使用窗口函数更好。
+使用窗口函数，只用了一步就完成了查询。而且，由于没有用到临时表，执行的效率也更高了。很显然，**在这种需要用到分组统计的结果对每一条记录进行计算的场景下，使用窗口函数更好**。
 
+### 2.2 窗口函数分类
 
+MySQL从8.0版本开始支持窗口函数。窗口函数的作用类似于在查询中对数据进行分组，不同的是，分组操作会把分组的结果聚合成一条记录，而窗口函数是将结果置于每一条数据记录中。
 
+窗口函数可以分为`静态窗口函数`和`动态窗口函数`。
+* 静态窗口函数的窗口大小是固定的，不会因为记录的不同而不同；
+* 动态窗口函数的窗口大小会随着记录的不同而变化。
 
+MySQL官方网站窗口函数的网址为https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html#function_row-number 。
 
+窗口函数总体上可以分为序号函数、分布函数、前后函数、首尾函数和其他函数，如下表：
 
-
-
+<table>
+    <tr>
+        <td align="center">函数分类</td>
+        <td align="center">函数</td>
+        <td align="center">函数说明</td>
+    </tr>
+    <tr>
+        <th rowspan="3" align="center">序号函数</th>
+        <td align="center">ROW_NUMBER()</td>
+        <td align="center">顺序排序</td>
+    </tr>
+    <tr>
+        <td align="center">RANK()</td>
+        <td align="center">并列排序，会跳过重复的序号，比如序号为1，1，3</td>
+    </tr>
+    <tr>
+        <td align="center">DENSE_RANK()</td>
+        <td align="center">并列排序，不会跳过重复的序号，比如序号为1，1，2</td>
+    </tr>
+    <tr>
+        <td rowspan="2" align="center">分布函数</td>
+        <td align="center">PERCENT_RANK()</td>
+        <td align="center">等级值百分比</td>
+    </tr>
+    <tr>
+        <td align="center">CUME_DIST()</td>
+        <td align="center">累积分布值</td>
+    </tr>
+    <tr>
+        <td rowspan="2" align="center">前后函数</td>
+        <td align="center">LAG(expr,n)</td>
+        <td align="center">返回当前行的前n行的expr的值</td>
+    </tr>
+    <tr>
+        <td align="center">LEAD(expr,n)</td>
+        <td align="center">返回当前行的后n行的expr的值</td>
+    </tr>
+    <tr>
+        <td rowspan="2" align="center">首位函数</td>
+        <td align="center">FIRST_VALUE(expr)</td>
+        <td align="center">返回第一个expr的值</td>
+    </tr>
+    <tr>
+        <td align="center">LAST_VALUE(expr)</td>
+        <td align="center">返回最后一个expr的值</td>
+    </tr>
+    <tr>
+        <td rowspan="2" align="center">其他函数</td>
+        <td align="center">NTH_VALUE(expr,n)</td>
+        <td align="center">返回第n个expr的值</td>
+    </tr>
+    <tr>
+        <td align="center">NTILE(n)</td>
+        <td align="center">将分区中的有序数据分为n个桶，记录桶编号</td>
+    </tr>
+</table>
 
 
 
