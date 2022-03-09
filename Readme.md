@@ -74,6 +74,10 @@ DCL:数据控制语言：COMMIT \ ROLLBACK \ SAVEPOINT \ GRANT \ REVOKE
 |   order by排序列表    |  8   |
 | limit 起始条目索引，条目数; |  9   |
 
+## 相关资源
+
+1. MySQL教程：https://www.begtut.com/mysql/mysql-tutorial.html
+
 ## [SQL关键字](Other/src/main/sql/SQL关键字/SQL关键字.md)
 
 ## [问题与拓展](Other/src/main/sql/SQL问题与拓展/问题与拓展.md)
