@@ -61,8 +61,22 @@ Subquery代表子查询，子查询前使用WITH语句将结果集命名为cte_n
 
 #### 12. 窗口函数
 
-MySQL 8开始支持窗口函数。在之前的版本中已存在的大部分`聚合函数`在MySQL 8中也可以
-作为窗口函数来使用。
+MySQL 8开始支持窗口函数。在之前的版本中已存在的大部分`聚合函数`在MySQL 8中也可以作为窗口函数来使用。
+
+|      函数名称      |             描述              |
+|:--------------:|:---------------------------:|
+|  CUME_DIST()   |           累计的分布值            |
+|  DENSE_RANK()  |         对当前记录不间断排序          |
+| FIRST_VALUE()  |       返回窗口首行记录的对应字段值        |
+|     LAG()      |        返回对应字段的前N行记录         |
+|  LAST_VALUE()  |       返回窗口尾行记录的对应字段值        |
+|     LEAD()     |        返回对应字段的后N行记录         |
+|  NTH_VALUE()   |        返回第N条记录对应的字段值        |
+|    NTILE()     |       将区划分为N组，并返回组的数量       |
+| PERCENT_RANK() | 返回0到1之间的小数，表示某个字段值在数据分区中的排名 |
+|     RANK()     |       返回分区内每条记录对应的排名        |
+|  ROW_NUMBER()  |      返回每一条记录对应的序号，且不重复      |
+
 
 #### 13. 正则表达式支持
 
@@ -83,6 +97,56 @@ MySQL在8.0.4以后的版本中采用支持Unicode的国际化组件库实现正
 #### 17. 增强的MySQL复制
 
 MySQL 8复制支持对`JSON文档`进行部分更新的`二进制日志记录`，该记录`使用紧凑的二进制格式`，从而节省记录完整JSON文档的空间。当使用基于语句的日志记录时，这种紧凑的日志记录会自动完成，并且可以通过将新的binlog_row_value_options系统变量值设置为PARTIAL_JSON来启用。
+
+### 1.2 MySQL8.0移除的旧特性
+
+在MySQL 5.7版本上开发的应用程序如果使用了MySQL8.0 移除的特性，语句可能会失败，或者产生不同的执行结果。为了避免这些问题，对于使用了移除特性的应用，应当尽力修正避免使用这些特性，并尽可能使用替代方法。
+
+#### 1. 查询缓存
+
+`查询缓存已被移除`，删除的项有：
+1. 语句：FLUSH QUERY CACHE和RESET QUERY CACHE。
+2. 系统变量：query_cache_limit、query_cache_min_res_unit、query_cache_size、query_cache_type、query_cache_wlock_invalidate。
+3. 状态变量：Qcache_free_blocks、Qcache_free_memory、Qcache_hits、Qcache_inserts、Qcache_lowmem_prunes、Qcache_not_cached、Qcache_queries_in_cache、Qcache_total_blocks。 
+4. 线程状态：checking privileges on cached query、checking query cache for query、invalidating query cache entries、sending cached result to client、storing result in query cache、waiting for query cache lock。
+
+#### 2. 加密相关
+
+删除的加密相关的内容有：ENCODE()、DECODE()、ENCRYPT()、DES_ENCRYPT()和DES_DECRYPT()函数，配置项des-key-file，系统变量have_crypt，FLUSH语句的DES_KEY_FILE选项，HAVE_CRYPT CMake选项。对于移除的ENCRYPT()函数，考虑使用SHA2()替代，对于其他移除的函数，使用AES_ENCRYPT()和AES_DECRYPT()替代。
+
+#### 3. 空间函数相关
+
+在MySQL 5.7版本中，多个空间函数已被标记为过时。这些过时函数在MySQL 8中都已被移除，只保留了对应的ST_和MBR函数。
+
+#### 4. \N和NULL
+
+在SQL语句中，解析器不再将\N视为NULL，所以在SQL语句中应使用NULL代替\N。这项变化不会影响使用LOAD DATA INFILE或者SELECT...INTO OUTFILE操作文件的导入和导出。在这类操作中，NULL仍等同于\N。
+
+#### 5. mysql_install_db
+
+在MySQL分布中，已移除了mysql_install_db程序，数据字典初始化需要调用带着--initialize或者--initialize-insecure选项的mysqld来代替实现。另外，--bootstrap和INSTALL_SCRIPTDIR CMake也已被删除。
+
+#### 6. 通用分区处理程序
+
+通用分区处理程序已从MySQL服务中被移除。为了实现给定表分区，表所使用的存储引擎需要自有的分区处理程序。提供本地分区支持的MySQL存储引擎有两个，即InnoDB和NDB，而在MySQL 8中只支持InnoDB。
+
+#### 7. 系统和状态变量信息
+
+在INFORMATION_SCHEMA数据库中，对系统和状态变量信息不再进行维护。GLOBAL_VARIABLES、SESSION_VARIABLES、GLOBAL_STATUS、SESSION_STATUS表都已被删除。另外，系统变量show_compatibility_56也已被删除。被删除的状态变量有Slave_heartbeat_period、Slave_last_heartbeat,Slave_received_heartbeats、Slave_retried_transactions、Slave_running。以上被删除的内容都可使用性能模式中对应的内容进行替代。
+
+#### 8. mysql_plugin工具 
+
+mysql_plugin工具用来配置MySQL服务器插件，现已被删除，可使用--plugin-load或--plugin-load-add选项在服务器启动时加载插件或者在运行时使用INSTALL PLUGIN语句加载插件来替代该工具。
+
+## 2. 新特性1：窗口函数
+
+
+
+
+
+
+
+
 
 
 
