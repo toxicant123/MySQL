@@ -670,13 +670,13 @@ FLUSH PRIVILEGES;
 ### 问题1：root用户密码忘记，重置的操作
 
 1. 通过任务管理器或者服务管理，关掉mysqld(服务进程) 
-2. 通过命令行+特殊参数开启mysqld mysqld -- defaults-file="D:\ProgramFiles\mysql\MySQLServer5.7Data\my.ini" --skip-grant-tables
+2. 通过命令行+特殊参数开启`mysqld mysqld -- defaults-file="D:\ProgramFiles\mysql\MySQLServer5.7Data\my.ini" --skip-grant-tables`
 3. 此时，mysqld服务进程已经打开。并且不需要权限检查 
 4. mysql -uroot 无密码登陆服务器。另启动一个客户端进行 
 5. 修改权限表 
-    1) use mysql; 
-    2) update user set authentication_string=password('新密码') where user='root' and Host='localhost'; 
-    3) flush privileges; 
+    1) `use mysql;` 
+    2) `update user set authentication_string=password('新密码') where user='root' and Host='localhost';` 
+    3) `flush privileges;` 
 6. 通过任务管理器，关掉mysqld服务进程。 
 7. 再次通过服务管理，打开mysql服务。 
 8. 即可用修改后的新密码登陆。
